@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ishika Saree Collections</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff9fc;color:#35202b}
+header{background:#880e4f;color:white;text-align:center;padding:24px 12px}
+header h1{margin:0;font-family:Georgia,serif}
+header p{margin-bottom:0}
+nav{background:#f8dce9;padding:12px;text-align:center}
+nav a{color:#880e4f;text-decoration:none;font-weight:bold;margin:0 8px}
+.hero{text-align:center;padding:32px 14px;background:#fce4ec}
+.hero h2{font-size:28px;color:#880e4f;margin:0 0 10px}
+.hero p{line-height:1.6}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px;max-width:900px;margin:auto}
+.card{background:white;border:1px solid #f0d3e0;border-radius:12px;overflow:hidden;padding-bottom:12px}
+.card img{width:100%;height:190px;object-fit:cover;background:#f5e5ec}
+.card h3{font-size:15px;margin:10px}
+.price{color:#ad1457;font-size:18px;font-weight:bold;margin:10px}
+button,.btn{display:block;width:calc(100% - 20px);margin:8px 10px;padding:11px 5px;border:0;border-radius:7px;background:#880e4f;color:white;text-decoration:none;text-align:center;font-size:14px;cursor:pointer}
+.pay{background:#167447}
+footer{text-align:center;padding:24px;background:#f8dce9;line-height:1.8}
+@media(min-width:650px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}.card img{height:260px}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Ishika Saree Collections</h1>
+<p>Beautiful Sarees • Best Prices • Trusted Service</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#shop">Sarees</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+<h2>మీ అందానికి అందమైన చీరలు!</h2>
+<p>Traditional • Fancy • Silk • Cotton Sarees</p>
+<p>మీకు నచ్చిన చీరను ఎంచుకోండి. WhatsApp ద్వారా ఆర్డర్ చేయండి.</p>
+<a class="btn" href="#shop">Shop Now</a>
+</section>
+
+<h2 id="shop" style="text-align:center;color:#880e4f">
+Our Saree Collection
+</h2>
+
+<div class="products" id="products"></div>
+
+<footer id="contact">
+<h2>Ishika Saree Collections</h2>
+<p>ఆర్డర్ల కోసం WhatsApp చేయండి</p>
+<p>Instagram: @ishikasareecollections</p>
+<p>YouTube: Ishika Saree Collections</p>
+<p>© 2026 Ishika Saree Collections</p>
+</footer>
+
+<script>
+// మీ వివరాలను ఇక్కడ మార్చండి
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const UPI_ID = "yourupi@bank";
+const BUSINESS_NAME = "Ishika Saree Collections";
+
+// మీ నిజమైన చీరల ఫోటోలు, పేర్లు, ధరలు పెట్టండి
+const sarees = [
+ {
+  name:"Silk Saree",
+  price:1499,
+  image:"images/saree1.jpg"
+ },
+ {
+  name:"Cotton Saree",
+  price:899,
+  image:"images/saree2.jpg"
+ },
+ {
+  name:"Designer Saree",
+  price:1199,
+  image:"images/saree3.jpg"
+ },
+ {
+  name:"Fancy Saree",
+  price:999,
+  image:"images/saree4.jpg"
+ }
+];
+
+const container = document.getElementById("products");
+
+sarees.forEach(s => {
+  const message = encodeURIComponent(
+    `Hello ${BUSINESS_NAME}, I want to order ${s.name}. Price: ₹${s.price}. Please share availability and delivery details.`
+  );
+
+  const whatsapp =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+  const upi =
+    `upi://pay?pa=${encodeURIComponent(UPI_ID)}` +
+    `&pn=${encodeURIComponent(BUSINESS_NAME)}` +
+    `&am=${s.price}&cu=INR` +
+    `&tn=${encodeURIComponent(s.name)}`;
+
+  container.innerHTML += `
+    <article class="card">
+      <img src="${s.image}"
+           alt="${s.name}"
+           onerror="this.style.display='none'">
+      <h3>${s.name}</h3>
+      <div class="price">₹${s.price}</div>
+      <a class="btn" href="${whatsapp}" target="_blank"
+         rel="noopener">Order on WhatsApp</a>
+      <a class="btn pay" href="${upi}">Pay by UPI</a>
+    </article>
+  `;
+});
+</script>
+
+</body>
+</html>
